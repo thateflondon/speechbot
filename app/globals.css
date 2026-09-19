@@ -1,1 +1,34 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Font */
+    --font-primary: "Outfit", sans-serif;
+
+    /* Color Palette */
+    --color-primary: #6326A2;
+    --color-secondary: #263FA9;
+    --color-dark-primary: #1C1B43;
+    --color-dark-secondary: #1E2A52;
+    --color-accent: #2E5B84;
+    --color-light: #E3E8EF;
+    --color-muted: #677489;
+    --color-dark-muted: #364153;
+  }
+
+  body {
+    font-family: var(--font-primary);
+    /* 16px - Body Text */
+    font-size: 1rem;
+  }
+
+  /* 20px - Logo */
+  .text-logo {
+    font-size: 1.25rem;
+  }
+
+  /* 12px - Small Text */
+  .text-small {
+    font-size: 0.75rem;
+  }
+}

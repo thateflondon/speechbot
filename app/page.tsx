@@ -18,14 +18,15 @@ export default function Home() {
   const speeds = ["0.5x", "0.75x", "1x", "1.5x"];
 
   return (
-    <div className="relative min-h-screen bg-[var(--color-dark-primary)] flex">
+    <div className="relative bg-[var(--color-dark-primary)] flex max-w-[1350px] w-full mx-auto max-h-[940px] min-h-screen">
       {/* Left Side - Background Image (50%) */}
-      <div className="w-1/2 relative overflow-hidden">
+      <div className="w-1/2 h-full relative overflow-hidden">
         <Image
-          src="/assets/robot-bg-2.png"
+          src="/assets/bg-robot.png"
           alt=""
-          fill
-          className="object-cover"
+          width={675}
+          height={940}
+          className=""
           priority
         />
       </div>
@@ -56,9 +57,7 @@ export default function Home() {
             </div>
           </div>
           <p className="text-sm text-[var(--color-light)] font-medium">
-            Enter your text above and hit &quot;play.&quot; You can choose a<br />
-            different voice by selecting an option from the dropdown menu.
-          </p>
+            Enter your text above and hit &quot;play.&quot; You can choose a different voice by selecting an option from the dropdown menu.</p>
         </div>
 
         {/* Settings Section */}
@@ -111,7 +110,7 @@ export default function Home() {
         </div>
 
         {/* Action Button */}
-        <Button className="w-[576px]">Text to Speech</Button>
+        <Button className="max-w-[576px] w-full">Text to Speech</Button>
       </div>
     </div>
   );

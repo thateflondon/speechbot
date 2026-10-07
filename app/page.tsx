@@ -32,9 +32,9 @@ export default function Home() {
       </div>
 
       {/* Right Side - Content starts at 50% + 32px */}
-      <div className="absolute left-[calc(50%+32px)] right-8 top-8 flex flex-col gap-8">
+      <div className="absolute left-[calc(50%+32px)] right-8 top-[9px] flex flex-col gap-8">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-[13px]">
           <h1 className="text-logo text-[var(--color-light)] font-medium tracking-tight">
             Speechbot
           </h1>
@@ -44,7 +44,7 @@ export default function Home() {
         </div>
 
         {/* Text Input Section */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col">
           <div className="relative">
             <TextArea value={text} onChange={setText} placeholder="Enter your text" />
             <div className="absolute bottom-2 right-2">
@@ -61,14 +61,14 @@ export default function Home() {
         </div>
 
         {/* Settings Section */}
-        <div className="flex flex-col gap-2">
-          <p className="text-small text-[var(--color-light)] font-medium">
+        <div className="flex flex-col gap-[7px]">
+          <p className="text-small text-[var(--color-light)] font-medium relative mt-[-4px]">
             Settings
           </p>
 
           <div className="flex flex-wrap gap-3 items-start">
             {/* Voice Settings */}
-            <div className="bg-[var(--color-dark-secondary)] rounded-xl px-4 py-3 inline-flex items-center gap-4">
+            <div className="bg-[var(--color-dark-secondary)] rounded-xl px-4 py-3 inline-flex items-center gap-4 max-w-[295px] w-full">
               <span className="text-[var(--color-light)] font-medium text-base">
                 Voice
               </span>
@@ -76,6 +76,7 @@ export default function Home() {
               <div className="h-9 w-px bg-[var(--color-muted)] opacity-30" />
 
               <Dropdown
+                className="gap-[0]"
                 value={language}
                 onChange={setLanguage}
                 options={languages}
@@ -85,6 +86,7 @@ export default function Home() {
               <div className="h-9 w-px bg-[var(--color-muted)] opacity-30" />
 
               <Dropdown
+                className="gap-[0]"
                 value={voice}
                 onChange={setVoice}
                 options={voices}
@@ -93,7 +95,7 @@ export default function Home() {
             </div>
 
             {/* Speed Settings */}
-            <div className="bg-[var(--color-dark-secondary)] rounded-xl px-4 py-3 inline-flex items-center gap-3.5">
+            <div className="bg-[var(--color-dark-secondary)] rounded-xl px-4 py-3 inline-flex items-center gap-3.5 max-w-[306px] w-full">
               <span className="text-[var(--color-light)] font-medium text-base">
                 Speed
               </span>

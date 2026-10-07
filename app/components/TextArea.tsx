@@ -16,7 +16,7 @@ export default function TextArea({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className={`w-full h-[175px] bg-[var(--color-dark-secondary)] border-2 border-[var(--color-accent)] rounded-xl p-5 text-[var(--color-light)] font-medium resize-none focus:outline-none focus:border-[var(--color-primary)] ${className}`}
+      className={`w-full h-[175px] bg-[var(--color-dark-secondary)] border-2 border-[var(--color-accent)] rounded-xl p-5 pt-[17px] text-[var(--color-light)] font-medium resize-none focus:outline-none focus:border-[var(--color-primary)] ${className}`}
     />
   );
 }

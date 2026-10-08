@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Button from "./components/Button";
 import TextArea from "./components/TextArea";
@@ -8,14 +8,101 @@ import Dropdown from "./components/Dropdown";
 import SpeedSelector from "./components/SpeedSelector";
 
 export default function Home() {
+  // trigger the textarea value
   const [text, setText] = useState("");
-  const [language, setLanguage] = useState("en-US");
-  const [voice, setVoice] = useState("Albert");
-  const [speed, setSpeed] = useState("1x");
 
-  const languages = ["en-US", "en-GB", "fr-FR", "es-ES", "de-DE"];
-  const voices = ["Albert", "Emma", "James", "Sophia"];
+  const [language, setLanguage] = useState("en-US");
+  const [voice, setVoice] = useState("");
+
+  const [availableLanguages, setAvailableLanguages] = useState<string[]>([]);
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [speed, setSpeed] = useState("1x");
+  // helps to stop the sound if it's already playing 
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  // const languages = ["en-US", "en-GB", "fr-FR", "es-ES", "de-DE"];
+  // const voices = ["Albert", "Emma", "James", "Sophia"];
   const speeds = ["0.5x", "0.75x", "1x", "1.5x"];
+
+  // Speech Recognition API
+  // const recognition = new SpeechRecognition();
+
+  useEffect(() => {
+    const loadVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+
+      const uniqueLanguages = [...new Set(voices.map(v => v.lang))];
+      setAvailableLanguages(uniqueLanguages);
+
+      console.log("uniquesLanguages length = ",uniqueLanguages.length);
+      
+
+      console.log(voices);
+      console.log("voices lenght = ", voices.length);
+
+      const voiceNames = voices.map(v => v.name);
+      // store complete objects, not just names
+      setAvailableVoices(voices);
+
+      console.log("voiceName = ", voiceNames);
+      console.log("voiceName lenght = ", voiceNames.length);
+      
+      
+      // setAvailableVoices(voices);
+      // setAvailableVoices(voices.map(v => v.name));
+    };
+
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+    // cleanup
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+
+  }, []);
+
+  // handle text to speech
+  const handleSpeaking = () => {
+    console.log('hello...');
+    console.log("text = ", text);
+    
+    // avoid launching text-to-speech if the text is empty or contains only spaces
+    if(!text.trim()) return;
+    console.log("testtt = ",text);
+
+    // check if speechSynthesis is supported
+    if('speechSynthesis' in window) {
+      // if already reading, stop
+      if(isSpeaking) {
+        window.speechSynthesis.cancel();
+        setIsSpeaking(false);
+        return;
+      }
+
+      // create the utterance
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = language;
+      utterance.rate = parseFloat(speed);
+      const selectedVoice = availableVoices.find(v => v.name === voice);
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+      
+      // events management
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+
+      console.log("utterance.lang = ",utterance.lang);
+      console.log("utterance.rate = ",utterance.rate);
+      console.log("utterance.volume = ",utterance.volume);
+
+      // play
+      window.speechSynthesis.speak(utterance);
+    }
+    
+  }
 
   return (
     <div className="relative bg-[var(--color-dark-primary)] flex max-w-[1350px] w-full mx-auto max-h-[940px] min-h-screen">
@@ -79,7 +166,7 @@ export default function Home() {
                 className="gap-[0]"
                 value={language}
                 onChange={setLanguage}
-                options={languages}
+                options={availableLanguages}
                 label=""
               />
 
@@ -89,13 +176,14 @@ export default function Home() {
                 className="gap-[0]"
                 value={voice}
                 onChange={setVoice}
-                options={voices}
+                // filter available voices based on the chosen language
+                options={availableVoices.filter(v => v.lang === language).map(v => v.name)}
                 label=""
               />
             </div>
 
             {/* Speed Settings */}
-            <div className="bg-[var(--color-dark-secondary)] rounded-xl px-4 py-3 inline-flex items-center gap-3.5 max-w-[306px] w-full">
+            <div className="bg-[var(--color-dark-secondary)] rounded-xl px-4 py-3 inline-flex items-center max-w-[306px] gap-[13px] w-full">
               <span className="text-[var(--color-light)] font-medium text-base">
                 Speed
               </span>
@@ -112,7 +200,10 @@ export default function Home() {
         </div>
 
         {/* Action Button */}
-        <Button className="max-w-[576px] w-full">Text to Speech</Button>
+        <Button 
+        className="max-w-[576px] w-full"
+        onClick={handleSpeaking}
+        >Text to Speech</Button>
       </div>
     </div>
   );

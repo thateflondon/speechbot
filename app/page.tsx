@@ -10,49 +10,31 @@ import SpeedSelector from "./components/SpeedSelector";
 export default function Home() {
   // trigger the textarea value
   const [text, setText] = useState("");
-
   const [language, setLanguage] = useState("en-US");
   const [voice, setVoice] = useState("");
 
   const [availableLanguages, setAvailableLanguages] = useState<string[]>([]);
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [speed, setSpeed] = useState("1x");
+  const speeds = ["0.5x", "0.75x", "1x", "1.5x"];
   // helps to stop the sound if it's already playing 
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-  // const languages = ["en-US", "en-GB", "fr-FR", "es-ES", "de-DE"];
-  // const voices = ["Albert", "Emma", "James", "Sophia"];
-  const speeds = ["0.5x", "0.75x", "1x", "1.5x"];
-
-  // Speech Recognition API
-  // const recognition = new SpeechRecognition();
 
   useEffect(() => {
     const loadVoices = () => {
       const voices = window.speechSynthesis.getVoices();
-
       const uniqueLanguages = [...new Set(voices.map(v => v.lang))];
       setAvailableLanguages(uniqueLanguages);
 
-      console.log("uniquesLanguages length = ",uniqueLanguages.length);
-      
-
-      console.log(voices);
-      console.log("voices lenght = ", voices.length);
-
-      const voiceNames = voices.map(v => v.name);
       // store complete objects, not just names
       setAvailableVoices(voices);
-
-      console.log("voiceName = ", voiceNames);
-      console.log("voiceName lenght = ", voiceNames.length);
       
-      
-      // setAvailableVoices(voices);
-      // setAvailableVoices(voices.map(v => v.name));
     };
 
+    // initial load
     loadVoices();
+    // reload when browser finishes loading voices
     window.speechSynthesis.onvoiceschanged = loadVoices;
 
     // cleanup
@@ -64,12 +46,9 @@ export default function Home() {
 
   // handle text to speech
   const handleSpeaking = () => {
-    console.log('hello...');
-    console.log("text = ", text);
     
     // avoid launching text-to-speech if the text is empty or contains only spaces
     if(!text.trim()) return;
-    console.log("testtt = ",text);
 
     // check if speechSynthesis is supported
     if('speechSynthesis' in window) {
@@ -80,10 +59,13 @@ export default function Home() {
         return;
       }
 
-      // create the utterance
+      // create the utterance with text to speak
       const utterance = new SpeechSynthesisUtterance(text);
+      // set language
       utterance.lang = language;
+      // convert "1x" string to number
       utterance.rate = parseFloat(speed);
+      // find and assign the selected voice by name
       const selectedVoice = availableVoices.find(v => v.name === voice);
       if (selectedVoice) {
         utterance.voice = selectedVoice;
@@ -93,10 +75,6 @@ export default function Home() {
       utterance.onstart = () => setIsSpeaking(true);
       utterance.onend = () => setIsSpeaking(false);
       utterance.onerror = () => setIsSpeaking(false);
-
-      console.log("utterance.lang = ",utterance.lang);
-      console.log("utterance.rate = ",utterance.rate);
-      console.log("utterance.volume = ",utterance.volume);
 
       // play
       window.speechSynthesis.speak(utterance);

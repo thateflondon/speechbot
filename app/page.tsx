@@ -57,6 +57,15 @@ export default function Home() {
 
   }, []);
 
+  // handle language change and reset voice
+  const handleLanguageChange = (newLanguage: string) => {
+    setLanguage(newLanguage);
+    const voicesForLanguage = availableVoices.filter(v => v.lang === newLanguage);
+    if (voicesForLanguage.length > 0) {
+      setVoice(voicesForLanguage[0].name);
+    }
+  };
+
   // handle text to speech
   const handleSpeaking = () => {
     
@@ -163,7 +172,7 @@ export default function Home() {
                   <Dropdown
                     className="gap-[0]"
                     value={language}
-                    onChange={setLanguage}
+                    onChange={handleLanguageChange}
                     options={availableLanguages}
                     label=""
                   />

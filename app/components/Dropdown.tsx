@@ -1,4 +1,5 @@
 import Image from "next/image";
+import expandDown from "@/public/assets/expand-down.svg"
 
 interface DropdownProps {
   value: string;
@@ -34,7 +35,7 @@ export default function Dropdown({
         </select>
         <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
           <Image
-            src="/speechbot/assets/expand-down.svg"
+            src={expandDown}
             alt=""
             width={24}
             height={24}

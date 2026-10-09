@@ -2,10 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+
 import Button from "./components/Button";
 import TextArea from "./components/TextArea";
 import Dropdown from "./components/Dropdown";
 import SpeedSelector from "./components/SpeedSelector";
+
+import backgroundRobot from "@/public/assets/bg-robot.png";
+import vectorImage from "@/public/assets/vector.svg";
+import expandImage from "@/public/assets/expand.svg";
 
 export default function Home() {
   // loading
@@ -119,7 +124,7 @@ export default function Home() {
       {/* Left Side - Background Image (50%) */}
       <div className="w-1/2 h-full relative overflow-hidden hidden sm:block">
         <Image
-          src="/speechbot/assets/bg-robot.png"
+          src={backgroundRobot}
           alt=""
           width={675}
           height={940}
@@ -137,7 +142,7 @@ export default function Home() {
             Speechbot
           </h1>
           <div className="relative w-[55px] h-[28px]">
-            <Image src="/speechbot/assets/vector.svg" alt="" fill />
+            <Image src={vectorImage} alt="" fill />
           </div>
         </div>
 
@@ -147,7 +152,7 @@ export default function Home() {
             <TextArea value={text} onChange={setText} placeholder="Enter your text" />
             <div className="absolute bottom-2 right-2">
               <Image
-                src="/speechbot/assets/group-3.svg"
+                src={expandImage}
                 alt=""
                 width={10}
                 height={9}

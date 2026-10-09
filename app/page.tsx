@@ -127,7 +127,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <p className="text-sm text-[var(--color-light)] font-medium">
+          <p className="text-sm text-[var(--color-light)] font-medium tracking-[-0.01em]">
             Enter your text above and hit &quot;play.&quot; You can choose a different voice by selecting an option from the dropdown menu.</p>
         </div>
 

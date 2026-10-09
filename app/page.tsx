@@ -97,22 +97,14 @@ export default function Home() {
           alt=""
           width={675}
           height={940}
-          className="hidden min-[1025px]:block"
-          priority
-        />
-        <Image
-          src="/assets/bg-robot-1024.png"
-          alt=""
-          width={512}
-          height={940}
-          className="block min-[1025px]:hidden"
+          className="w-full h-screen object-cover object-center"
           priority
         />
       </div>
 
       {/* Right Side - Content (50%) */}
       <div className="w-1/2 h-full relative overflow-hidden">
-        <div className="flex flex-col gap-8 max-[1025px]:max-w-[447px] max-[1025px]:w-full mt-[9px] mx-8">
+        <div className="flex flex-col gap-8 w-full mt-[9px] px-4 md:px-8">
         {/* Header */}
         <div className="flex items-center justify-between mt-[13px]">
           <h1 className="text-logo text-[var(--color-light)] font-medium tracking-tight">

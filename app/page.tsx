@@ -8,28 +8,34 @@ import Dropdown from "./components/Dropdown";
 import SpeedSelector from "./components/SpeedSelector";
 
 export default function Home() {
-  // trigger the textarea value
+  // user input and speech synthesis settings
   const [text, setText] = useState("");
   const [language, setLanguage] = useState("en-US");
   const [voice, setVoice] = useState("");
 
+  // available voices loaded from speechSynthesis.getVoices()
   const [availableLanguages, setAvailableLanguages] = useState<string[]>([]);
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+
+  // speed ​​control
   const [speed, setSpeed] = useState("1x");
   const speeds = ["0.5x", "0.75x", "1x", "1.5x"];
+
   // helps to stop the sound if it's already playing 
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-
+  
   useEffect(() => {
+    // extracts the unique languages ​​of the voices available for the selection filter
     const loadVoices = () => {
       const voices = window.speechSynthesis.getVoices();
+      // deduplicates languages ​​(multiple voices can have the same language)
       const uniqueLanguages = [...new Set(voices.map(v => v.lang))];
+      // updates the state with the list of languages ​​to populate the select
       setAvailableLanguages(uniqueLanguages);
 
       // store complete objects, not just names
       setAvailableVoices(voices);
-      
     };
 
     // initial load

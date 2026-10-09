@@ -110,8 +110,9 @@ export default function Home() {
         />
       </div>
 
-      {/* Right Side - Content starts at 50% + 32px */}
-      <div className="absolute left-[calc(50%+32px)] right-8 top-[9px] flex flex-col gap-8 max-[1025px]:max-w-[447px] max-[1025px]:w-full">
+      {/* Right Side - Content (50%) */}
+      <div className="w-1/2 h-full relative overflow-hidden">
+        <div className="flex flex-col gap-8 max-[1025px]:max-w-[447px] max-[1025px]:w-full mt-[9px] mx-8">
         {/* Header */}
         <div className="flex items-center justify-between mt-[13px]">
           <h1 className="text-logo text-[var(--color-light)] font-medium tracking-tight">
@@ -192,10 +193,11 @@ export default function Home() {
         </div>
 
         {/* Action Button */}
-        <Button 
+        <Button
         className="max-w-[576px] w-full"
         onClick={handleSpeaking}
         >Text to Speech</Button>
+        </div>
       </div>
     </div>
   );

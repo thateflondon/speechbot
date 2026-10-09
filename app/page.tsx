@@ -119,7 +119,7 @@ export default function Home() {
       {/* Left Side - Background Image (50%) */}
       <div className="w-1/2 h-full relative overflow-hidden hidden sm:block">
         <Image
-          src="/assets/bg-robot.png"
+          src="/speechbot/assets/bg-robot.png"
           alt=""
           width={675}
           height={940}
@@ -137,7 +137,7 @@ export default function Home() {
             Speechbot
           </h1>
           <div className="relative w-[55px] h-[28px]">
-            <Image src="/assets/vector.svg" alt="" fill />
+            <Image src="/speechbot/assets/vector.svg" alt="" fill />
           </div>
         </div>
 
@@ -147,7 +147,7 @@ export default function Home() {
             <TextArea value={text} onChange={setText} placeholder="Enter your text" />
             <div className="absolute bottom-2 right-2">
               <Image
-                src="/assets/group-3.svg"
+                src="/speechbot/assets/group-3.svg"
                 alt=""
                 width={10}
                 height={9}

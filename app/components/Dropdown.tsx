@@ -34,7 +34,7 @@ export default function Dropdown({
         </select>
         <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
           <Image
-            src="/assets/expand-down.svg"
+            src="/speechbot/assets/expand-down.svg"
             alt=""
             width={24}
             height={24}

@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Speechbot
+
+A modern, responsive text-to-speech web application built with Next.js and the Web Speech API.
+
+## Features
+
+- **Text-to-Speech Conversion**: Convert any text to speech using the Web Speech API
+- **Multi-language Support**: Choose from multiple languages with automatic voice detection
+- **Voice Selection**: Select from available system voices for each language
+- **Adjustable Speed**: Control playback speed (0.5x, 0.75x, 1x, 1.5x)
+- **Responsive Design**: Fully responsive layout optimized for mobile, tablet, and desktop
+- **Loading States**: Smooth loading experience with spinner during voice initialization
+- **Modern UI**: Clean interface with gradient buttons and dark theme
+
+## Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **API**: Web Speech API (SpeechSynthesis)
+- **Icons & Assets**: Next.js Image optimization
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ installed
+- npm, yarn, pnpm, or bun package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/thateflondon/speechbot.git
+cd speechbot
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Enter your text in the text area
+2. Select a language from the dropdown
+3. Choose a voice for the selected language
+4. Adjust playback speed if desired
+5. Click "Text to Speech" to hear your text
 
-## Learn More
+## Browser Compatibility
 
-To learn more about Next.js, take a look at the following resources:
+The Web Speech API is supported in:
+- Chrome 33+
+- Edge 14+
+- Safari 7+
+- Opera 21+
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Note: Firefox has limited support. For best experience, use Chrome or Edge.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+speechbot/
+├── app/
+│   ├── components/      # Reusable UI components
+│   │   ├── Button.tsx
+│   │   ├── Dropdown.tsx
+│   │   ├── SpeedSelector.tsx
+│   │   └── TextArea.tsx
+│   ├── globals.css      # Global styles and CSS variables
+│   ├── layout.tsx       # Root layout
+│   └── page.tsx         # Main application page
+├── public/
+│   └── assets/          # Images and SVG icons
+└── README.md
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Author
+
+Created by [thateflondon](https://github.com/thateflondon)

@@ -8,10 +8,12 @@ import Dropdown from "./components/Dropdown";
 import SpeedSelector from "./components/SpeedSelector";
 
 export default function Home() {
+  // loading
+  const [loading, setLoading] = useState(true);
   // user input and speech synthesis settings
   const [text, setText] = useState("");
   const [language, setLanguage] = useState("en-US");
-  const [voice, setVoice] = useState("");
+  const [voice, setVoice] = useState("Albert");
 
   // available voices loaded from speechSynthesis.getVoices()
   const [availableLanguages, setAvailableLanguages] = useState<string[]>([]);
@@ -36,6 +38,11 @@ export default function Home() {
 
       // store complete objects, not just names
       setAvailableVoices(voices);
+
+      // stop loading once voices are loaded
+      if (voices.length > 0) {
+        setLoading(false);
+      }
     };
 
     // initial load
@@ -91,7 +98,7 @@ export default function Home() {
   return (
     <div className="relative bg-[var(--color-dark-primary)] flex max-w-[1350px] w-full mx-auto max-h-[940px] min-h-screen">
       {/* Left Side - Background Image (50%) */}
-      <div className="w-1/2 h-full relative overflow-hidden">
+      <div className="w-1/2 h-full relative overflow-hidden hidden sm:block">
         <Image
           src="/assets/bg-robot.png"
           alt=""
@@ -103,8 +110,8 @@ export default function Home() {
       </div>
 
       {/* Right Side - Content (50%) */}
-      <div className="w-1/2 h-full relative overflow-hidden">
-        <div className="flex flex-col gap-8 w-full mt-[9px] px-4 md:px-8">
+      <div className="w-1/2 sm:w-1/2 w-full h-full relative overflow-hidden">
+        <div className="flex flex-col gap-8 w-full mt-2 min-[413px]:mt-[9px] px-3 min-[413px]:px-4 md:px-8">
         {/* Header */}
         <div className="flex items-center justify-between mt-[13px]">
           <h1 className="text-logo text-[var(--color-light)] font-medium tracking-tight">
@@ -140,31 +147,39 @@ export default function Home() {
 
           <div className="flex flex-wrap gap-3 items-start">
             {/* Voice Settings */}
-            <div className="bg-[var(--color-dark-secondary)] rounded-xl px-4 py-3 inline-flex items-center gap-4 max-w-[295px] w-full">
-              <span className="text-[var(--color-light)] font-medium text-base">
-                Voice
-              </span>
+            <div className="bg-[var(--color-dark-secondary)] rounded-xl px-4 py-3 inline-flex items-center gap-4 max-w-[295px] w-full min-h-[60px]">
+              {loading ? (
+                <div className="flex items-center justify-center w-full">
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[var(--color-light)]"></div>
+                </div>
+              ) : (
+                <>
+                  <span className="text-[var(--color-light)] font-medium text-base">
+                    Voice
+                  </span>
 
-              <div className="h-9 w-px bg-[var(--color-muted)] opacity-30" />
+                  <div className="h-9 w-px bg-[var(--color-muted)] opacity-30" />
 
-              <Dropdown
-                className="gap-[0]"
-                value={language}
-                onChange={setLanguage}
-                options={availableLanguages}
-                label=""
-              />
+                  <Dropdown
+                    className="gap-[0]"
+                    value={language}
+                    onChange={setLanguage}
+                    options={availableLanguages}
+                    label=""
+                  />
 
-              <div className="h-9 w-px bg-[var(--color-muted)] opacity-30" />
+                  <div className="h-9 w-px bg-[var(--color-muted)] opacity-30" />
 
-              <Dropdown
-                className="gap-[0]"
-                value={voice}
-                onChange={setVoice}
-                // filter available voices based on the chosen language
-                options={availableVoices.filter(v => v.lang === language).map(v => v.name)}
-                label=""
-              />
+                  <Dropdown
+                    className="gap-[0]"
+                    value={voice}
+                    onChange={setVoice}
+                    // filter available voices based on the chosen language
+                    options={availableVoices.filter(v => v.lang === language).map(v => v.name)}
+                    label=""
+                  />
+                </>
+              )}
             </div>
 
             {/* Speed Settings */}

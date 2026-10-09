@@ -19,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${outfit.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-[var(--font-primary)]">{children}</body>
+      <body suppressHydrationWarning className="min-h-full flex flex-col font-[var(--font-primary)]">{children}</body>
     </html>
   );
 }

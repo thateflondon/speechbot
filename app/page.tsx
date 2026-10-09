@@ -9,7 +9,7 @@ import Dropdown from "./components/Dropdown";
 import SpeedSelector from "./components/SpeedSelector";
 
 import backgroundRobot from "@/public/assets/bg-robot.png";
-import vectorImage from "@/public/assets/vector.svg";
+import logo from "@/public/assets/logo.svg";
 import expandImage from "@/public/assets/expand.svg";
 
 export default function Home() {
@@ -142,7 +142,7 @@ export default function Home() {
             Speechbot
           </h1>
           <div className="relative w-[55px] h-[28px]">
-            <Image src={vectorImage} alt="" fill />
+            <Image src={logo} alt="" fill />
           </div>
         </div>
 

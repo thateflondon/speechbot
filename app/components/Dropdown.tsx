@@ -20,11 +20,11 @@ export default function Dropdown({
       <p className="text-[var(--color-light)] font-medium text-base whitespace-nowrap">
         {label}
       </p>
-      <div className="relative">
+      <div className="relative max-w-[80px]">
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="appearance-none bg-transparent text-[var(--color-light)] font-medium text-base pr-8 focus:outline-none cursor-pointer"
+          className="appearance-none bg-transparent text-[var(--color-light)] font-medium text-base pr-8 focus:outline-none cursor-pointer w-full overflow-hidden text-ellipsis whitespace-nowrap"
         >
           {options.map((option) => (
             <option key={option} value={option} className="bg-[var(--color-dark-secondary)]">

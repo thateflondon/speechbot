@@ -10,6 +10,7 @@ import SpeedSelector from "./components/SpeedSelector";
 export default function Home() {
   // loading
   const [loading, setLoading] = useState(true);
+  
   // user input and speech synthesis settings
   const [text, setText] = useState("");
   const [language, setLanguage] = useState("en-US");
@@ -25,6 +26,9 @@ export default function Home() {
 
   // helps to stop the sound if it's already playing 
   const [isSpeaking, setIsSpeaking] = useState(false);
+
+  // error
+  const [error, setError] = useState(false);
 
   
   useEffect(() => {
@@ -68,9 +72,15 @@ export default function Home() {
 
   // handle text to speech
   const handleSpeaking = () => {
-    
+
     // avoid launching text-to-speech if the text is empty or contains only spaces
-    if(!text.trim()) return;
+    if(!text.trim()) {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+      return;
+    }
 
     // check if speechSynthesis is supported
     if('speechSynthesis' in window) {
@@ -144,8 +154,10 @@ export default function Home() {
               />
             </div>
           </div>
+          {error && <span className="text-xs text-red-600">You must enter your text</span>}
           <p className="text-sm text-[var(--color-light)] font-medium tracking-[-0.01em]">
-            Enter your text above and hit &quot;play.&quot; You can choose a different voice by selecting an option from the dropdown menu.</p>
+            Enter your text above and hit &quot;play.&quot; You can choose a different voice by selecting an option from the dropdown menu.
+          </p>
         </div>
 
         {/* Settings Section */}
@@ -210,7 +222,7 @@ export default function Home() {
 
         {/* Action Button */}
         <Button
-        className="max-w-[576px] w-full"
+        className="max-w-[576px] w-full cursor-pointer"
         onClick={handleSpeaking}
         >Text to Speech</Button>
         </div>

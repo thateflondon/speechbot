@@ -17,7 +17,7 @@ export default function SpeedSelector({
         <button
           key={option}
           onClick={() => onChange(option)}
-          className={`px-2.5 py-2 rounded-lg font-medium text-sm transition-colors ${
+          className={`px-2.5 py-2 rounded-lg font-medium text-sm transition-colors cursor-pointer ${
             value === option
               ? "bg-[var(--color-dark-primary)] text-[var(--color-light)]"
               : "text-[var(--color-light)] hover:bg-[var(--color-dark-primary)]/50"

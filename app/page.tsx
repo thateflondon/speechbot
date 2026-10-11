@@ -120,7 +120,7 @@ export default function Home() {
   }
 
   return (
-    <div className="relative bg-[var(--color-dark-primary)] flex max-w-[1350px] w-full mx-auto max-h-[940px] min-h-screen">
+    <main className="relative bg-[var(--color-dark-primary)] flex max-w-[1350px] w-full mx-auto max-h-[940px] min-h-screen">
       {/* Left Side - Background Image (50%) */}
       <div className="w-1/2 h-full relative overflow-hidden hidden sm:block">
         <Image
@@ -232,6 +232,6 @@ export default function Home() {
         >Text to Speech</Button>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

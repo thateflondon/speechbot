@@ -53,7 +53,7 @@ yarn dev
 pnpm dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [http://localhost:3000/speechbot](http://localhost:3000/speechbot) in your browser
 
 ## Usage
 
